@@ -67,6 +67,12 @@ def save_upload_file(upload_file: UploadFile, destination: str):
         upload_file.file.close()
         return True
 
+import oss2
+from oss2.credentials import EnvironmentVariableCredentialsProvider
+auth = oss2.ProviderAuth(EnvironmentVariableCredentialsProvider())
+
+bucket = oss2.Bucket(auth, os.getenv('OSS_ENDPOINT'), os.getenv("OSS_BUCKET_NAME"))
+
 """
 ------------------------------------------------------------------------------ 
                                 User endpoints
@@ -468,7 +474,7 @@ async def generate_journal(user_id: UUID, body: Dict[str, Any], db: Session = De
         raise HTTPException(status_code=404, detail="User not found")
     
     try:
-        photo_ids = body.get("photo_ids")
+        photo_ids = [UUID(id_str) for id_str in body.get("photo_ids")]
     except KeyError:
         raise HTTPException(status_code=400, detail="No photos selected")
     
@@ -602,11 +608,12 @@ def create_user_photo(user_id: UUID, photo_create: str = Form(...), image: Uploa
     savepath = os.path.join(savedir, unique_filename)
     
     if image.file:
-
-        if save_upload_file(image, savepath):
-            url = f"{STATIC_SERVER}/static/images/{user_id}/{unique_filename}"
-        else:
-            raise HTTPException(status_code=400, detail="Error saving file")
+        try:
+            bucket.put_object(unique_filename, image.file)
+            url = bucket.sign_url('GET', unique_filename, 3600, slash_safe=True).split('?')[0]
+        except Exception as e:
+            raise HTTPException(status_code=400, detail=f"Error saving file: {e}")
+        
     else:
         raise HTTPException(status_code=400, detail="No file uploaded")
         

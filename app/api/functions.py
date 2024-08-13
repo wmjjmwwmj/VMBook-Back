@@ -12,8 +12,6 @@ from typing import List, Dict, Any, Union
 load_dotenv()
 
 dashscope.api_key = os.environ.get("QWEN_API_KEY")
-STATIC_PATH = os.getenv("STATIC_PATH")
-STATIC_SERVER = os.getenv("STATIC_SERVER")
 
 
 def describe_image(image_url):
@@ -26,13 +24,11 @@ def describe_image(image_url):
     Returns:
         str or None: The description of the image, or None if no description is available.
     """
-    image_url = image_url.replace(STATIC_SERVER, "")
-    url = str(Path(STATIC_PATH).parent / str(Path(image_url).relative_to("/")))
     messages = [
         {
             "role": "user",
             "content": [
-                {"image": url},
+                {"image": image_url},
                 {"text": "Please describe what you see in this image."},
             ],
         }
@@ -110,11 +106,13 @@ async def generate_journal_func(entries: List[Dict[str, Any]]) -> Union[str, str
     if response["output"]:
         journal = response["output"]["text"]
         title, journal = get_title_from_journal(journal)
+        return title, journal
     else:
         return "Failed Entry", "Failed to generate journal."
     
     
-def get_title_from_journal(journal: str) -> str:
+def get_title_from_journal(journal: str) -> Union[str, str]:
+    title = ""
     idx = journal.find("#")
     # remove introduction before the first #
     if idx != -1:
@@ -123,4 +121,3 @@ def get_title_from_journal(journal: str) -> str:
     title = journal.split("\n")[0].strip("#")
     return title, journal
 
-# TODO: Save file to oss bucket
