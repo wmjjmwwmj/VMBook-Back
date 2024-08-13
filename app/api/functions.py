@@ -5,7 +5,6 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 import base64, uuid, io, json
-from PIL import Image
 from passlib.context import CryptContext
 import requests
 from typing import List, Dict, Any, Union
@@ -123,3 +122,5 @@ def get_title_from_journal(journal: str) -> str:
     
     title = journal.split("\n")[0].strip("#")
     return title, journal
+
+# TODO: Save file to oss bucket
