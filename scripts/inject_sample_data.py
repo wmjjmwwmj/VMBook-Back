@@ -47,7 +47,7 @@ test_device = response.json()
 
 filepath = os.path.join(os.path.dirname(__file__), "../tests/testimage.jpg")
 
-for i in range(40):
+for i in range(3):
     with open(filepath, "rb") as image_file:
         files = {"image": ("testimage.jpg", open(filepath, "rb"), "image/jpeg")}
         photo_create = {
@@ -74,7 +74,7 @@ for i in range(40):
 
 # create sample journal
 
-for i in range(50):
+for i in range(5):
     test_journal = {
         "title": f"Test Journal {i}",
         "content": f"This is a test journal {i}",

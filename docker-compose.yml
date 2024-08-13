@@ -20,8 +20,7 @@ services:
       DB_URL: mysql+mysqlconnector://root:${MYSQL_ROOT_PASSWORD}@db:3306/${MYSQL_DATABASE}
       SECRET_KEY: ${SECRET_KEY}
       ALGORITHM: ${ALGORITHM}
-      STATIC_PATH: /static
-      STATIC_SERVER: static_server:8000
+      QWEN_API_KEY: ${QWEN_API_KEY}
       OSS_ENDPOINT: ${OSS_ENDPOINT}
       OSS_ACCESS_KEY_ID: ${OSS_ACCESS_KEY_ID}
       OSS_ACCESS_KEY_SECRET: ${OSS_ACCESS_KEY_SECRET}
