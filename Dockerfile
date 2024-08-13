@@ -1,5 +1,5 @@
 # Use the official Python image from the Docker Hub
-FROM python:3.9
+FROM registry.cn-hangzhou.aliyuncs.com/base_mj/vmbook:python39
 
 # Set the working directory in the container
 WORKDIR /ws
