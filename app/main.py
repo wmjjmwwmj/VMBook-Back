@@ -12,11 +12,9 @@ from api import router
 import dotenv
 
 dotenv.load_dotenv()
-STATIC_PATH = os.getenv("STATIC_PATH")
 
 app = FastAPI()
 
-app.mount("/static", StaticFiles(directory=Path(STATIC_PATH)), name="static")
 
 app.add_middleware(
     CORSMiddleware,
