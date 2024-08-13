@@ -22,7 +22,7 @@ def describe_image(image_url):
     Describes the content of an image using a multi-modal conversation model.
 
     Args:
-        image_url (str): The URL of the image to be described.
+        image_url (str): The URL of the image to be described.HHHHHHHHHH
 
     Returns:
         str or None: The description of the image, or None if no description is available.
