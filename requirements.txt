@@ -11,3 +11,4 @@ passlib
 alembic
 dashscope
 test
+test
