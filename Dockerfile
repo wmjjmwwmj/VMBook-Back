@@ -1,5 +1,5 @@
 # Use the official Python image from the Docker Hub
-FROM registry.cn-hangzhou.aliyuncs.com/base_mj/vmbook:python39
+FROM registry.cn-hangzhou.aliyuncs.com/base_mj/vmbook:latest
 
 # Set the working directory in the container
 WORKDIR /backend
