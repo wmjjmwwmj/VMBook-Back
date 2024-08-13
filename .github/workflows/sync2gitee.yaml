@@ -3,7 +3,6 @@ name: sync2gitee
 on:
   push:
     branches:
-      - master
       - test_sync
 jobs:
   repo-sync:
