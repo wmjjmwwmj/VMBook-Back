@@ -123,3 +123,5 @@ def get_title_from_journal(journal: str) -> str:
     
     title = journal.split("\n")[0].strip("#")
     return title, journal
+
+# TODO: Save file to oss bucket

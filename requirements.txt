@@ -4,9 +4,10 @@ uvicorn
 sqlmodel
 sqlalchemy
 mysql-connector-python
-Pillow
 python-dotenv
 python-jose
 passlib
 alembic
 dashscope
+python-multipart
+oss2
