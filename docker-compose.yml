@@ -12,7 +12,7 @@ services:
       - app-network
 
   fastapi:
-    image: fastapi:latest
+    image: registry.cn-hangzhou.aliyuncs.com/base_mj/vmbook:latest
     build:
       context: .
       dockerfile: Dockerfile
