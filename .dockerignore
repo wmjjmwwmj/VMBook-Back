@@ -1,1 +1,11 @@
-.env
+**/.env
+**/uploads
+**/.vscode
+**/.pytest_cache
+**/static
+**/__pycache__/
+# Byte-compiled / optimized / DLL files
+*.py[cod]
+*.pyc
+*.pyo
+*~

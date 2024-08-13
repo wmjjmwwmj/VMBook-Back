@@ -1,5 +1,5 @@
 # Use the official Python image from the Docker Hub
-FROM python:3.9
+FROM python:3.9-slim
 
 # Set the working directory in the container
 WORKDIR /backend
@@ -13,8 +13,12 @@ RUN pip install --no-cache-dir -r requirements.txt -i https://mirrors.aliyun.com
 # Copy the rest of the application code into the container
 COPY ./ /backend/
 
+
 # Expose the port that the app runs on
 EXPOSE 8000
 
+
 # Command to run the application
-CMD ["cd","/ws/app", "&&", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+WORKDIR /backend/app
+
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
