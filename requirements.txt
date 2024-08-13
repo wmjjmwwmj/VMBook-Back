@@ -10,7 +10,3 @@ python-jose
 passlib
 alembic
 dashscope
-test
-test
-test
-test
